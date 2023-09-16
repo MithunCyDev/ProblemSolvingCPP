@@ -69,3 +69,29 @@ int main() {
 
     return 0;
 }
+
+//saveThePrisoner
+#include <iostream>
+using namespace std;
+
+int saveThePrisoner(int n, int m, int s) {
+    int result = (m + s - 1) % n;
+    if (result == 0) {
+        result = n;
+    }
+    return result;
+}
+
+int main() {
+    int t;
+    cin >> t;
+    
+    for (int i = 0; i < t; i++) {
+        int n, m, s;
+        cin >> n >> m >> s;
+        int prisonerToWarn = saveThePrisoner(n, m, s);
+        cout << prisonerToWarn << endl;
+    }
+
+    return 0;
+}
