@@ -95,3 +95,30 @@ int main() {
 
     return 0;
 }
+
+//viralAdvertising
+#include <iostream>
+using namespace std;
+
+int viralAdvertising(int n) {
+    int shared = 5;
+    int liked = shared / 2;
+    int cumulativeLikes = liked;
+
+    for (int day = 2; day <= n; day++) {
+        shared = liked * 3; // Each person shares with 3 friends
+        liked = shared / 2;
+        cumulativeLikes += liked;
+    }
+
+    return cumulativeLikes;
+}
+
+int main() {
+    int dayNumber = 3;
+    int result = viralAdvertising(dayNumber);
+    cout << result << endl; // Output: 9
+
+    return 0;
+}
+
