@@ -123,3 +123,32 @@ int main() {
     return 0;
 }
 
+//jumpingOnClouds
+#include <iostream>
+#include <vector>
+
+int jumpingOnClouds(std::vector<int>& c, int k) {
+    int energy = 100;
+    int currentPosition = 0;
+    const int n = c.size();
+
+    do {
+        currentPosition = (currentPosition + k) % n;
+        energy -= c[currentPosition] * 2 + 1;
+    } while (currentPosition != 0);
+
+    return energy;
+}
+
+int main() {
+    // Example usage
+    std::vector<int> clouds = {0, 0, 1, 0, 0, 1, 1, 0};
+    int jumpDistance = 2;
+    int finalEnergy = jumpingOnClouds(clouds, jumpDistance);
+
+    std::cout << finalEnergy << std::endl; // Output: 92
+
+    return 0;
+}
+
+
