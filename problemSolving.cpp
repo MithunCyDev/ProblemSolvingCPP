@@ -151,4 +151,40 @@ int main() {
     return 0;
 }
 
+#include <iostream>
+#include <string>
+using namespace std;
+
+//appendAndDelete
+string appendAndDelete(string s, string t, int k) {
+    int commonLength = 0;
+
+    // Find the length of the common prefix
+    for (int i = 0; i < min(s.length(), t.length()); i++) {
+        if (s[i] == t[i]) {
+            commonLength++;
+        } else {
+            break;
+        }
+    }
+
+    // Calculate the total operations needed
+    int totalOperations = s.length() + t.length() - 2 * commonLength;
+
+    // Check if it's possible
+    if (totalOperations <= k && (totalOperations - k) % 2 == 0 || k >= s.length() + t.length()) {
+        return "Yes";
+    } else {
+        return "No";
+    }
+}
+
+int main() {
+    // Example usage
+    cout << appendAndDelete("hackerhappy", "hackerrank", 9) << endl; // Output: Yes
+    cout << appendAndDelete("aba", "aba", 7) << endl; // Output: Yes
+
+    return 0;
+}
+
 
