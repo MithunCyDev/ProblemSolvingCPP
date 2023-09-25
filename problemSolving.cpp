@@ -187,4 +187,73 @@ int main() {
     return 0;
 }
 
+//queensAttack
+#include <iostream>
+#include <vector>
+#include <cmath>
+using namespace std;
+
+int queensAttack(int n, int k, int r_q, int c_q, vector<vector<int>> obstacles) {
+    int up = n - r_q;
+    int down = r_q - 1;
+    int left = c_q - 1;
+    int right = n - c_q;
+    int up_left = min(up, left);
+    int up_right = min(up, right);
+    int down_left = min(down, left);
+    int down_right = min(down, right);
+
+    for (int i = 0; i < k; i++) {
+        int r_obs = obstacles[i][0];
+        int c_obs = obstacles[i][1];
+
+        if (r_obs == r_q) {
+            if (c_obs < c_q) {
+                left = min(left, c_q - c_obs - 1);
+            } else {
+                right = min(right, c_obs - c_q - 1);
+            }
+        } else if (c_obs == c_q) {
+            if (r_obs < r_q) {
+                down = min(down, r_q - r_obs - 1);
+            } else {
+                up = min(up, r_obs - r_q - 1);
+            }
+        } else if (abs(r_obs - r_q) == abs(c_obs - c_q)) {
+            if (r_obs < r_q) {
+                if (c_obs < c_q) {
+                    down_left = min(down_left, min(r_q - r_obs - 1, c_q - c_obs - 1));
+                } else {
+                    down_right = min(down_right, min(r_q - r_obs - 1, c_obs - c_q - 1));
+                }
+            } else {
+                if (c_obs < c_q) {
+                    up_left = min(up_left, min(r_obs - r_q - 1, c_q - c_obs - 1));
+                } else {
+                    up_right = min(up_right, min(r_obs - r_q - 1, c_obs - c_q - 1));
+                }
+            }
+        }
+    }
+
+    return up + down + left + right + up_left + up_right + down_left + down_right;
+}
+
+int main() {
+    int n, k, r_q, c_q;
+    cin >> n >> k >> r_q >> c_q;
+    vector<vector<int>> obstacles(k, vector<int>(2));
+
+    for (int i = 0; i < k; i++) {
+        for (int j = 0; j < 2; j++) {
+            cin >> obstacles[i][j];
+        }
+    }
+
+    int result = queensAttack(n, k, r_q, c_q, obstacles);
+    cout << result << endl;
+
+    return 0;
+}
+
 
